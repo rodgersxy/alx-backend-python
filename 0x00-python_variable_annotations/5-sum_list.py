@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""a type-annotated function List"""
+"""
+a type-annotated function List
+"""
 from typing import List
 
 
