@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Python and Async functions"""
 import random
 import asyncio
 
