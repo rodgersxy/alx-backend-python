@@ -29,3 +29,7 @@ class TestGithubOrgClient(unittest.TestCase):
         spec = GithubOrgClient(data)
         spec.org()
         mock.assert_called_once_with(endpoint)
+
+
+if __name__ == "__main__":
+    unittest.main()
