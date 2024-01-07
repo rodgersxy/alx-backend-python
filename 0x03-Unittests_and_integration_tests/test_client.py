@@ -110,5 +110,11 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        """tear down after each class"""
+        """
+        tear down after each class
+        """
         cls.get_patcher.stop()
+
+
+if __name__ == "__main__":
+    unittest.main()
