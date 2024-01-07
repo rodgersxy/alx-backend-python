@@ -1,34 +1,34 @@
-#!/usr/bin/env python3
-"""
-Unittests and Integration Tests
-"""
 import unittest
-import json
-from parameterized import parameterized, parameterized_class
-from unittest import mock
-from unittest.mock import patch, Mock, PropertyMock
+from unittest.mock import patch
+from parameterized import parameterized
 from client import GithubOrgClient
-from fixtures import TEST_PAYLOAD
 
 
 class TestGithubOrgClient(unittest.TestCase):
     """
-    Unittests for GithubOrgClient
+    Unit tests for GithubOrgClient class.
     """
 
     @parameterized.expand([
-        ("google"),
-        ("abc")
+        ("google",),
+        ("abc",),
     ])
     @patch('client.get_json')
-    def test_public_repos(self, data, mock):
+    def test_org(self, org_name, mock_get_json):
         """
-        Test public_repos
+        Test that GithubOrgClient.org returns the correct value.
         """
-        endpoint = 'https://api.github.com/orgs/{}'.format(data)
-        spec = GithubOrgClient(data)
-        spec.org()
-        mock.assert_called_once_with(endpoint)
+        expected_response = {
+            'login': org_name, 'name': f'Mocked {org_name} Organization'}
+        mock_get_json.return_value = expected_response
+
+        github_org_client = GithubOrgClient(org_name)
+
+        org_info = github_org_client.org
+        mock_get_json.assert_called_once_with(
+            f"https://api.github.com/orgs/{org_name}")
+
+        self.assertEqual(org_info, expected_response)
 
 
 if __name__ == "__main__":
